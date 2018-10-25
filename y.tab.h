@@ -39,45 +39,49 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     NL = 258,
-     HOW_MANY_LINE = 259,
-     A = 260,
-     INT_LITERAL = 261,
+     HOW_MANY_LINE = 258,
+     JP = 259,
+     INT_LITERAL = 260,
+     DOUBLE_LITERAL = 261,
      STR = 262,
-     LP = 263,
-     RP = 264,
-     ADD = 265,
-     SUB = 266,
-     MUL = 267,
-     DIV = 268,
-     MOD = 269
+     SMCLN = 263,
+     END = 264,
+     LP = 265,
+     RP = 266,
+     ADD = 267,
+     SUB = 268,
+     MUL = 269,
+     DIV = 270,
+     MOD = 271
    };
 #endif
 /* Tokens.  */
-#define NL 258
-#define HOW_MANY_LINE 259
-#define A 260
-#define INT_LITERAL 261
+#define HOW_MANY_LINE 258
+#define JP 259
+#define INT_LITERAL 260
+#define DOUBLE_LITERAL 261
 #define STR 262
-#define LP 263
-#define RP 264
-#define ADD 265
-#define SUB 266
-#define MUL 267
-#define DIV 268
-#define MOD 269
+#define SMCLN 263
+#define END 264
+#define LP 265
+#define RP 266
+#define ADD 267
+#define SUB 268
+#define MUL 269
+#define DIV 270
+#define MOD 271
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 5 "WLang.y"
+#line 6 "WLang.y"
 {
 	Tag *tag;
 }
 /* Line 1529 of yacc.c.  */
-#line 81 "y.tab.h"
+#line 85 "y.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

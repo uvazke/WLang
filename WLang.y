@@ -1,33 +1,37 @@
 %{
 	#include <stdio.h>
 	#include "WLang.h"
+
 %}
 %union{
 	Tag *tag;
 }
-%token NL
 %token HOW_MANY_LINE
-%token <tag> A
-%token <tag> INT_LITERAL
-%token STR
+%token <tag>JP
+%token INT_LITERAL DOUBLE_LITERAL
+%token STR SMCLN END
 %token LP RP ADD SUB MUL DIV MOD
 %type <tag> list expr term factor
-
 %%
 
 list
 	: /* Empty */
-	| list expr NL {printf("%d\n", $2);}
-	| list string NL 
 	{
-		fprintf(stderr, "Please input 'quit' to finish the program.\n");
+		//$$ = return_empty();
+		//fprintf(stderr, "Please.\n");
 	}
-	| list NL
-	| list HOW_MANY_LINE NL
-	| list A NL
+	| list expr SMCLN{print_val($2);}
+	| list string SMCLN 
 	{
-		{printf("%s\n", $2);}
+		fprintf(stderr, "Please input 'quit;' to finish the program.\n");
 	}
+	| list SMCLN
+	| list HOW_MANY_LINE SMCLN
+	| list JP SMCLN
+	{
+		print_val($2);
+	}
+	| list END SMCLN {exit(0);}
 
 	;
 string
@@ -41,19 +45,20 @@ string
 	;
 expr
 	: term
-	| expr ADD expr {$$ = $1 + $3;}
-	| expr SUB term {$$ = $1 - $3;}
-	| expr MOD term {$$ = $1 % $3;}
+	| expr ADD expr {$$ = return_calculated_tag(ADD_TYPE, $1 ,$3);}
+	| expr SUB term {$$ = return_calculated_tag(SUB_TYPE, $1 ,$3);}
+	| expr MOD term {$$ = return_calculated_tag(MOD_TYPE, $1 ,$3);}
 	| expr expr {$$ = $2;}
 	;
 term
 	: factor
-	| term MUL term {$$ = $1 * $3;}
-	| term DIV term {$$ = $1 / $3;}
+	| term MUL term {$$ = return_calculated_tag(MUL_TYPE, $1 ,$3);}
+	| term DIV term {$$ = return_calculated_tag(DIV_TYPE, $1 ,$3);}
 	;
 factor
 	: INT_LITERAL
-	| LP expr RP {$$ = $2;}
+	| DOUBLE_LITERAL
+	| LP expr RP {$$ = return_expr($2);}
 	;
 
 %%
