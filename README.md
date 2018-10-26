@@ -2,7 +2,7 @@
 
 ## Overview
 
-Wa Langage
+Wa Language
 
 ## Description
   
@@ -34,7 +34,15 @@ memorize variables.
 warning: variable c is overwritten.
 >>c;
 2
->>a+b=3;
+>>あ=12;い=4;
+memorize variables.
+memorize variables.
+>>あ;
+12
+>>い;
+4
+>>あ+い;
+16
 ```
 
 
