@@ -34,15 +34,12 @@ memorize variables.
 warning: variable c is overwritten.
 >>c;
 2
->>あ=12;い=4;
+>>ほげ=33;あかさ=22;
 memorize variables.
 memorize variables.
->>あ;
-12
->>い;
-4
->>あ+い;
-16
+>>ほげ+あかさ;
+55
+>>quit;#終了コマンド
 ```
 
 
