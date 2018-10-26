@@ -59,7 +59,7 @@ Tag *return_expr(Tag *tag){
 	}else if(tag->type == DOUBLE_TYPE){
 		result->type = DOUBLE_TYPE;
 		result->val.d = tag->val.d;
-	}else if(tag->type == STR_TYPE){		
+	}else if(tag->type == STR_TYPE){
 		result->type = STR_TYPE;
 		result->val.str = tag->val.str;
 	}
@@ -164,7 +164,7 @@ char *TrimSMCLNandOperators(Tag* tag){
 		int num=0;  
 		for(int i=0;i<strlen(tag->val.str);i++){
 			if(tag->val.str[i] != ' ' && tag->val.str[i] != ';' && tag->val.str[i] != '='){
-				if(tag->val.str[i] == '+' || tag->val.str[i] == '-' || tag->val.str[i] == '*' || tag->val.str[i] == '/' || tag->val.str[i] == '%')return result;
+				if(tag->val.str[i] == '+' || tag->val.str[i] == '-' || tag->val.str[i] == '*' || tag->val.str[i] == '/' || tag->val.str[i] == '%' || tag->val.str[i] == ')')return result;
 				result[num] = tag->val.str[i];
 				num++;
 			}
