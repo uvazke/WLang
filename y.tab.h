@@ -52,7 +52,8 @@
      SUB = 268,
      MUL = 269,
      DIV = 270,
-     MOD = 271
+     MOD = 271,
+     EQ = 272
    };
 #endif
 /* Tokens.  */
@@ -70,6 +71,7 @@
 #define MUL 269
 #define DIV 270
 #define MOD 271
+#define EQ 272
 
 
 
@@ -81,7 +83,7 @@ typedef union YYSTYPE
 	Tag *tag;
 }
 /* Line 1529 of yacc.c.  */
-#line 85 "y.tab.h"
+#line 87 "y.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

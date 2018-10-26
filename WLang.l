@@ -24,6 +24,7 @@
 <INITIAL>"*"		return MUL;
 <INITIAL>"/"		return DIV;
 <INITIAL>"%"		return MOD;
+<INITIAL>"="		return EQ;
 <INITIAL>[1-9][0-9]* {
 	Tag *tag = malloc(sizeof(Tag)); 
 	tag->type = INT_TYPE;
@@ -52,7 +53,7 @@
 	tag->type = STR_TYPE; 
 	tag->val.str = yytext;
 	yylval.tag = tag;
-	return JP;
+	return STR;
 }
 <INITIAL>^#	BEGIN COMMENT;
 <INITIAL>. fprintf(stderr, "Please input 'quit' to finish the program.\n");
@@ -73,10 +74,12 @@ void init_str_buffer(){
 
 static int my_yyinput(char *buffer, int max_size){
 	int len;
-	
 	if(str_buf==NULL){
 		str_used_length=0;
-		str_buf = readline(">>");
+		//it include case if it goes New Line without any input
+		while(str_buf==NULL || strcmp(str_buf,"")==0){
+			str_buf = readline(">>");
+		}
 		if(str_buf ==NULL){
 			return 0;
 		}
@@ -87,24 +90,7 @@ static int my_yyinput(char *buffer, int max_size){
 	if(str_buf[str_used_length] == '\0'){
 		free(str_buf);
 		str_buf = NULL;
-	} 
+	}
+	
 	return len;
 }
-/*
-int main(int argc, char ** argv){
-	++argv,--argc;
-	if(argc > 0){
-		yyin = fopen(argv[0], "r");
-		printf("File open.\n");
-	}else{
-		yyin = stdin;
-	}
-	if(yyin == NULL){
-		fprintf(stderr, "File open is failed.\n");exit(0);
-	}
-	yylex();	
-	printf("%d lines are read\n",line);
-	
-	return(0);
-}
-*/
